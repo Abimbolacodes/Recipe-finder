@@ -1,11 +1,58 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useFavorites } from '../context/FavoritesContext'
+import { useSearch } from '../context/SearchContext'
 
 export default function Navbar() {
   const { favorites } = useFavorites()
+  const { updateSearch } = useSearch()
+  const router = useRouter()
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const continentalCuisines = {
+    'European': [
+      { name: 'Italian', query: 'italian' },
+      { name: 'French', query: 'french' },
+      { name: 'Spanish', query: 'spanish' },
+      { name: 'Greek', query: 'greek' },
+      { name: 'British', query: 'british' },
+      { name: 'German', query: 'german' },
+    ],
+    'Asian': [
+      { name: 'Chinese', query: 'chinese' },
+      { name: 'Japanese', query: 'japanese' },
+      { name: 'Thai', query: 'thai' },
+      { name: 'Indian', query: 'indian' },
+      { name: 'Korean', query: 'korean' },
+      { name: 'Vietnamese', query: 'vietnamese' },
+    ],
+    'American': [
+      { name: 'American', query: 'american' },
+      { name: 'Mexican', query: 'mexican' },
+      { name: 'Brazilian', query: 'brazilian' },
+      { name: 'Caribbean', query: 'caribbean' },
+    ],
+    'African': [
+      { name: 'Moroccan', query: 'moroccan' },
+      { name: 'Ethiopian', query: 'ethiopian' },
+      { name: 'Nigerian', query: 'nigerian' },
+      { name: 'South African', query: 'south african' },
+    ],
+    'Middle Eastern': [
+      { name: 'Turkish', query: 'turkish' },
+      { name: 'Lebanese', query: 'lebanese' },
+      { name: 'Persian', query: 'persian' },
+    ],
+  }
+
+  const handleCuisineClick = (query) => {
+    updateSearch(query)
+    setIsDropdownOpen(false)
+    router.push('/')
+  }
 
   return (
     <nav className="bg-white shadow-lg fixed w-full top-0 z-50">
@@ -25,6 +72,56 @@ export default function Navbar() {
               >
                 Home
               </Link>
+              
+              {/* Continental Recipes Dropdown */}
+              <div className="relative">
+                <button
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                  onMouseLeave={() => setIsDropdownOpen(false)}
+                  className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
+                >
+                  Continental Recipes
+                  <svg 
+                    className={`ml-1 h-4 w-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {isDropdownOpen && (
+                  <div
+                    onMouseEnter={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                    className="absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden"
+                  >
+                    <div className="grid grid-cols-2 gap-4 p-4">
+                      {Object.entries(continentalCuisines).map(([continent, cuisines]) => (
+                        <div key={continent} className="space-y-2">
+                          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-gray-200 pb-1">
+                            {continent}
+                          </h3>
+                          <ul className="space-y-1">
+                            {cuisines.map((cuisine) => (
+                              <li key={cuisine.name}>
+                                <button
+                                  onClick={() => handleCuisineClick(cuisine.query)}
+                                  className="text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 w-full text-left px-2 py-1 rounded transition-colors"
+                                >
+                                  {cuisine.name}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <Link 
                 href="/recipes" 
                 className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
