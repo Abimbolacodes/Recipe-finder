@@ -1,9 +1,9 @@
 <div align="center">
-  <h2 align="center">AbimRide - Car Rental Website</h2>
+  <h2 align="center">Recipe-Finder - Car Rental Website</h2>
 
  Ridex is a modern and visually appealing web application designed for car renting services. <br/> Built using React.js &amp; Tailwind CSS. <br/>
 
-  <a href="https://car-rental-frontend-git-main-abimbola-olatunjis-projects.vercel.app/"><strong>➥ Live Demo</strong></a>
+  <a href="https://recipe-finder-vert-nine.vercel.app/"><strong>➥ Live Demo</strong></a>
 
 </div>
 
@@ -11,7 +11,7 @@
 
 ### Demo Screeshots
 
-![Micro Desktop Demo](./readme-images/readme.jpg "Desktop Demo")
+![Micro Desktop Demo](./readme-images/readme-1.png "Desktop Demo")
 
 ### Prerequisites
 
@@ -24,13 +24,13 @@ To install **Ridex**, run this command on your git bash:
 Linux and macOS:
 
 ```bash
-sudo git clone https://github.com/Abimbolacodes/car-rental-frontend/
+sudo git clone https://github.com/Abimbolacodes/Recipe-finder/
 ```
 
 Windows:
 
 ```bash
-git clone https://github.com/Abimbolacodes/car-rental-frontend/
+git clone https://github.com/Abimbolacodes/Recipe-finder/
 ```
 
 ## 💬 Contact
