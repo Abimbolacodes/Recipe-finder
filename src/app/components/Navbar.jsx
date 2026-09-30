@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useFavorites } from '../context/FavoritesContext'
 import { useSearch } from '../context/SearchContext'
+import DarkModeToggle from './DarkModeToggle'
 
 export default function Navbar() {
   const { favorites } = useFavorites()
@@ -55,7 +56,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-lg fixed w-full top-0 z-50">
+    <nav className="bg-white dark:bg-gray-900 shadow-lg fixed w-full top-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
@@ -68,7 +69,7 @@ export default function Navbar() {
             <div className="ml-10 flex items-center space-x-4">
               <Link 
                 href="/" 
-                className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Home
               </Link>
@@ -78,7 +79,7 @@ export default function Navbar() {
                 <button
                   onMouseEnter={() => setIsDropdownOpen(true)}
                   onMouseLeave={() => setIsDropdownOpen(false)}
-                  className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
+                  className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
                 >
                   Continental Recipes
                   <svg 
@@ -95,12 +96,12 @@ export default function Navbar() {
                   <div
                     onMouseEnter={() => setIsDropdownOpen(true)}
                     onMouseLeave={() => setIsDropdownOpen(false)}
-                    className="absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden"
+                    className="absolute left-0 mt-2 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
                   >
                     <div className="grid grid-cols-2 gap-4 p-4">
                       {Object.entries(continentalCuisines).map(([continent, cuisines]) => (
                         <div key={continent} className="space-y-2">
-                          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-gray-200 pb-1">
+                          <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-gray-700 pb-1">
                             {continent}
                           </h3>
                           <ul className="space-y-1">
@@ -108,7 +109,7 @@ export default function Navbar() {
                               <li key={cuisine.name}>
                                 <button
                                   onClick={() => handleCuisineClick(cuisine.query)}
-                                  className="text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 w-full text-left px-2 py-1 rounded transition-colors"
+                                  className="text-sm text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-700 w-full text-left px-2 py-1 rounded transition-colors"
                                 >
                                   {cuisine.name}
                                 </button>
@@ -124,33 +125,37 @@ export default function Navbar() {
 
               <Link 
                 href="/recipes" 
-                className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Browse Recipes
               </Link>
               <Link 
                 href="/saved" 
-                className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Saved Recipes {favorites.length > 0 && `(${favorites.length})`}
               </Link>
+              
+              {/* Dark Mode Toggle */}
+              <DarkModeToggle />
             </div>
           </div>
 
           {/* Mobile menu */}
-          <div className="md:hidden flex items-center space-x-4">
+          <div className="md:hidden flex items-center space-x-2">
             <Link 
               href="/recipes" 
-              className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
               Browse
             </Link>
             <Link 
               href="/saved" 
-              className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              className="text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
               Saved ({favorites.length})
             </Link>
+            <DarkModeToggle />
           </div>
         </div>
       </div>

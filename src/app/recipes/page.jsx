@@ -88,7 +88,7 @@ export default function RecipesPage() {
   }, [filters]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
       <Navbar />
 
       <div className="flex pt-16">
@@ -97,21 +97,21 @@ export default function RecipesPage() {
         <main className="flex-1 ml-64 p-8">
           {loading ? (
             <div className="flex items-center justify-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 dark:border-orange-500"></div>
             </div>
           ) : recipes.length === 0 ? (
             <div className="text-center py-12">
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+              <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4 transition-colors duration-200">
                 No recipes found
               </h2>
-              <p className="text-gray-600">Try adjusting your filters</p>
+              <p className="text-gray-600 dark:text-gray-400 transition-colors duration-200">Try adjusting your filters</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recipes.map((recipe, index) => (
                 <div
                   key={`${recipe.uri}-${index}`}
-                  className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-200 border border-transparent dark:border-gray-700"
                 >
                   <div className="relative">
                     <div className="relative h-48">
@@ -131,10 +131,10 @@ export default function RecipesPage() {
                           ? removeFromFavorites(recipe.uri)
                           : addToFavorites(recipe)
                       }
-                      className="absolute top-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+                      className="absolute top-4 right-4 p-2 rounded-full bg-white/20 dark:bg-gray-800/40 backdrop-blur-sm hover:bg-white/30 dark:hover:bg-gray-800/60 transition-all duration-200"
                     >
                       <svg
-                        className={`w-6 h-6 ${
+                        className={`w-6 h-6 transition-colors duration-200 ${
                           isFavorite(recipe.uri)
                             ? "text-red-500 fill-current"
                             : "text-white"
@@ -154,7 +154,7 @@ export default function RecipesPage() {
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-200">
                       {recipe.label}
                     </h3>
 
@@ -162,7 +162,7 @@ export default function RecipesPage() {
                       {recipe.cuisineType?.map((cuisine, idx) => (
                         <span
                           key={`${cuisine}-${idx}`}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                          className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm transition-colors duration-200"
                         >
                           {cuisine}
                         </span>
@@ -174,12 +174,12 @@ export default function RecipesPage() {
                         href={`/recipe/${encodeURIComponent(
                           recipe.uri.split("_")[1]
                         )}`}
-                        className="text-orange-600 hover:text-orange-700 font-medium text-sm"
+                        className="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 font-medium text-sm transition-colors duration-200"
                       >
                         View Recipe
                       </Link>
 
-                      <div className="text-sm text-gray-600">
+                      <div className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-200">
                         {Math.round(recipe.calories)} cal
                       </div>
                     </div>

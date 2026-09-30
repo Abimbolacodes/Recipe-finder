@@ -28,8 +28,8 @@ export default function Header() {
   }
 
   return (
-    <header className="relative min-h-[600px] flex items-center justify-center">
-      {/* Background Image */}
+    <header className="relative min-h-[600px] flex items-center justify-center transition-colors duration-200">
+      {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-banner-medium.jpg"
@@ -38,6 +38,8 @@ export default function Header() {
           className="object-cover"
           priority
         />
+        {/* Dark mode overlay */}
+        <div className="absolute inset-0 bg-black/0 dark:bg-black/40 transition-all duration-200"></div>
       </div>
 
       {/* Content */}
@@ -55,11 +57,11 @@ export default function Header() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Enter your dish name"
-              className={`${poppins.className} px-6 py-3 rounded-lg text-gray-800 w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-orange-500`}
+              className={`${poppins.className} px-6 py-3 rounded-lg text-gray-800 dark:text-white bg-white dark:bg-gray-800 dark:border-gray-600 w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 transition-colors duration-200 placeholder:text-gray-500 dark:placeholder:text-gray-400`}
             />
             <button 
               type="submit"
-              className="bg-orange-600 text-white px-8 py-3 rounded-lg hover:bg-orange-700 transition-colors font-medium"
+              className="bg-orange-600 dark:bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-orange-700 dark:hover:bg-orange-600 transition-colors duration-200 font-medium"
             >
               Search
             </button>
@@ -67,7 +69,7 @@ export default function Header() {
         </div>
 
         <div>
-          <p className={`${poppins.className} text-gray-200 text-lg drop-shadow`}>
+          <p className={`${poppins.className} text-gray-200 dark:text-gray-300 text-lg drop-shadow transition-colors duration-200`}>
             Search any recipe e.g: burger, pizza, sandwich, toast.
           </p>
         </div>

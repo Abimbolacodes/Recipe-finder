@@ -71,10 +71,10 @@ export default function Body() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 transition-colors duration-200">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
-          <p className="text-xl text-gray-600">Finding delicious recipes...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 dark:border-orange-500 mx-auto mb-4"></div>
+          <p className="text-xl text-gray-600 dark:text-gray-400 transition-colors duration-200">Finding delicious recipes...</p>
         </div>
       </div>
     )
@@ -82,19 +82,19 @@ export default function Body() {
 
   if (!loading && recipes.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 transition-colors duration-200">
         <div className="text-center">
-          <p className="text-xl text-gray-600 mb-4">No recipes found</p>
-          <p className="text-gray-500">Try searching for something else</p>
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-4 transition-colors duration-200">No recipes found</p>
+          <p className="text-gray-500 dark:text-gray-500 transition-colors duration-200">Try searching for something else</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 bg-white dark:bg-gray-900 transition-colors duration-200">
       {!searchQuery && (
-        <h2 className="text-2xl font-bold text-white mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 transition-colors duration-200">
           Discover Something Delicious
         </h2>
       )}
@@ -103,7 +103,7 @@ export default function Body() {
         {recipes.map((recipe, index) => (
           <div 
             key={`${recipe.uri}-${index}`}
-            className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-transparent dark:border-gray-700"
           >
             <div className="relative">
               <div className="relative h-48">
@@ -120,10 +120,10 @@ export default function Body() {
               {/* Save Button */}
               <button
                 onClick={() => isFavorite(recipe.uri) ? removeFromFavorites(recipe.uri) : addToFavorites(recipe)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-colors"
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/20 dark:bg-gray-800/40 backdrop-blur-sm hover:bg-white/30 dark:hover:bg-gray-800/60 transition-all duration-200"
               >
                 <svg
-                  className={`w-6 h-6 ${isFavorite(recipe.uri) ? 'text-red-500 fill-current' : 'text-white'}`}
+                  className={`w-6 h-6 transition-colors duration-200 ${isFavorite(recipe.uri) ? 'text-red-500 fill-current' : 'text-white'}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -139,7 +139,7 @@ export default function Body() {
             </div>
             
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-200">
                 {recipe.label}
               </h3>
               
@@ -147,7 +147,7 @@ export default function Body() {
                 {recipe.cuisineType?.map((cuisine, idx) => (
                   <span 
                     key={`${cuisine}-${idx}`}
-                    className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                    className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm transition-colors duration-200"
                   >
                     {cuisine}
                   </span>
@@ -157,12 +157,12 @@ export default function Body() {
               <div className="flex justify-between items-center">
                 <Link
                   href={`/recipe/${encodeURIComponent(recipe.uri.split('_')[1])}`}
-                  className="text-orange-600 hover:text-orange-700 font-medium text-sm"
+                  className="text-orange-600 dark:text-orange-500 hover:text-orange-700 dark:hover:text-orange-400 font-medium text-sm transition-colors duration-200"
                 >
                   View Recipe
                 </Link>
                 
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-200">
                   {Math.round(recipe.calories)} cal
                 </div>
               </div>
